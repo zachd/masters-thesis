@@ -1,0 +1,44 @@
+contract Identity {
+
+    // Contract Storage
+    address owner;
+    string ipfs_hash;
+    address recovery;
+
+    // Ownership Checks
+    modifier onlyOwner(){
+        if (msg.sender == owner) _;
+    }
+    modifier onlyOwnerOrRecovery(){
+        if (msg.sender == owner || msg.sender == recovery) _;
+    }
+
+    // Functions
+    function Identity() {
+        owner = msg.sender;
+        recovery = new Recovery(this);
+    }
+    function setRecovery(address _recovery) onlyOwner {
+        recovery = _recovery;
+    }
+    function setIPFSHash(string _ipfs_hash) onlyOwner {
+        ipfs_hash = _ipfs_hash;
+    }
+    function setContacts(address[] _contacts) onlyOwner {
+        Recovery recovery_c = Recovery(recovery);
+        recovery_c.setContacts(_contacts);
+    }
+    function addRecovery(address _recovery, address _key) onlyOwner {
+        Recovery recovery_c = Recovery(_recovery);
+        recovery_c.addRecovery(_key);
+    }
+    function transferOwner(address _owner) onlyOwnerOrRecovery {
+        owner = _owner;
+    }
+    function getDetails() returns 
+            (address _owner, string _ipfs_hash, address _recovery) {
+        _owner = owner;
+        _ipfs_hash = ipfs_hash;
+        _recovery = recovery;
+    }
+}

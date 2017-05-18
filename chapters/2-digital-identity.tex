@@ -1,0 +1,127 @@
+\chapter{Digital Identity}
+\section{Introduction}
+\subsection{Definitions}
+Identity is a set of characteristics and attributes that describe an entity, that can then be used to uniquely identify it. Digital identity is the representation of an entity in a specific environment or context. It consists of unique identifiers, descriptive attributes and data claims related to the system for which it is issued.
+
+To understand the variety of identity platforms that have existed over the years, some core concepts about identity should first be strictly defined.
+
+\subsubsection{Identifiers}
+An \textit{identifier} is a piece of information used to distinguish a distinct person or entity in the context of a system. As noted by security researcher Steve Riley \cite{riley_its_2006}, this is the user's answer to the question \textit{"Who are you?"}. An entity can possess multiple identifiers associated with different functions. An example of an identifier for a person, is their name, social security number, email address or credit card number.
+
+\subsubsection{Authentication}
+\textit{Authentication} of an entity is performed by proving an association between a user and their identity. Again, this answers the question \textit{"Ok, how can you prove it?"}. The system will present a challenge that the user must answer with secret or private information known as the \textit{authenticator}. Authenticators can include passwords, PINs and private keys. In the case of passwords, the system compares against secret information it already holds. For private keys, this is different, as it only needs to verify a proof that you know the secret value and does not require its transmission.
+
+Multi-factor authentication is commonly used to enhance system security and has been noted by recent research \cite{schneider_system_nodate} to consist of the following three methods:
+\begin{enumerate}
+	\item \textbf{Something you know}: This is the most common form of an authenticator, like a password.
+	\item \textbf{Something you have}: This is a physical object, like a smart card or hardware key.
+	\item \textbf{Something you are}: This is an intrinsic attribute of the entity, such as a fingerprint or biometric value.
+\end{enumerate}
+
+\subsubsection{Authorisation}
+\textit{Authorisation} is done to request permission to perform an action based on a particular identifier or attribute. This can be seen as the user asking the question \textit{"What can I do?"}. A system performs authorisation of the user against a database or rule set before approving their requested actions. The authenticated identity of the user is stored by the system, once authorised, to enable future access to resources. This often consists of issuing a time-bound token or ticket to the user.
+
+\subsubsection{Attributes}
+\textit{Attributes} are pieces of data related to an entity that helps describe it. The values of which can be persistent or temporary. An example of the attributes of a person are date of birth, gender, employer and physical address.
+
+\subsubsection{Attribute Attestations}
+\textit{Attestations} or \textit{claims} are verifications that establish the mapping from a given user attribute to their identity. In many identity systems, identity authentication precedes the attribute verification process, in order to confirm that the correct identity is being presented. An example of an attribute attestation is a bank attesting to the credit score of a customer, or the police attesting to the name and date of birth of a citizen.
+
+\subsection{Know Your Customer}
+\acf{KYC} is the process by which a business verifies the identities of its customers. This is often linked closely with \acf{AML} state regulation and is enforced with the view to reducing criminal activity and fraud. Accurate identification of customers is required by law and mistakes are met with hefty penalties \cite{nasiripour_uk_2012, financial_conduct_authority_fca_2017}.
+
+Therefore, businesses in the financial sector have a strong economic incentive to ensure that stakeholders are accurately identified in their systems. This incentive speeds up the pace of innovation in this sector, in search of improved procedures and enhanced technology.
+
+\subsection{Self-Sovereign Identity}
+Self-sovereign identity is a user-focused approach to identity, favouring the rights of the end-user. It proposes that individuals should have full control and autonomy over their identity and its data. These are succinctly defined by the cryptographer Christopher Allen \cite{allen_path_2016} with his ten pillars of self-sovereign identity:
+
+\begin{enumerate}
+	\item \textbf{Existence}: Users must have an independent presence in the system, and it must be an extension of their existing personal identity.
+	\item \textbf{Control}: Users are the ultimate authority over their identity, how it is used and how data is disclosed.
+	\item \textbf{Access}: Users must have easy access to their own data, without it being hidden or kept from them.
+	\item \textbf{Transparency}: Systems that manage the data, and the algorithms that analyse it, must be transparent, open-source and public.
+	\item \textbf{Persistence}: Identities must have the ability to be long-lived or permanent, at the discretion of the user.
+	\item \textbf{Portability}: Identities cannot be held by a single entity, trusted or not, and must be transportable between services.
+	\item \textbf{Interoperability}: Identities must have the ability to operate across systems, companies and borders.
+	\item \textbf{Consent}: Sharing of user data must be done with explicit consent and knowledge of the user.
+	\item \textbf{Minimalisation}: Data that is disclosed or shared should be minimised where possible. This is helped by the introduction of selective disclosure and zero-knowledge techniques.
+	\item \textbf{Protection}: The rights of the user must be central to the system, and be independent, decentralised and censorship-resistant.
+\end{enumerate}
+
+These pillars may seem to be strict, but all ten are required if a truly self-sovereign system is to be produced. The \ac{GDPR} in Europe \cite{european_parliament_eu_nodate} that will take effect in 2018 will legislate for some of these principles and puts the importance of this research into context.
+
+Other research organisations like ID2020 \cite{identity2020_systems_inc_id2020_nodate} are already attempting to tackle these issues on a global identity scale, and are doing so by developing new technology, lobbying governments, and advocating for the principles outlined above.
+
+\section{Identity Management Systems}
+\subsection{Overview}
+Identity management systems were introduced to address some of the risks outlined with siloed providers in Section \ref{sec:motivation}. They attempt to solve the fragmented multi-account problem by centralising the user's identity data and standardising its usage. Some recent approaches are summarised below.
+
+\subsection{OpenID}
+OpenID is a protocol that was developed in 2005 by Brad Fitzpatrick, the creator of the popular blogging platform LiveJournal \cite{fitzpatrick_distributed_2005}.
+It allows users to create an account with an identity provider that supports the standard, known as the \ac{OP}. The user can then use this account to authenticate with a third party service or \ac{RP}, without managing multiple usernames and passwords.
+
+The user must be sure to select a site that is reputable and long-lived, to ensure that the identity safely persists over time. OpenID removes the requirement for remembering passwords across many sites, but still leaves the users trusting their OpenID identity provider with important data. Accounts could be modified or deleted at any time at the discretion of the identity provider, so it does not provide much sovereignty to the user.
+
+This inherent centralisation, coupled with the fact that users are forced to rely on an abstract identity system, eventually caused OpenID to lose prominence on the web \cite{gilbertson_openid:_2011}.
+
+\subsection{SAML}
+\ac{SAML} \cite{oasis_security_services_saml_2005} is an XML-based open standard for web browser \ac{SSO} using secure tokens. It is commonly used in enterprise contexts for authentication between applications and a company Active Directory. Identity providers pass identity information to service providers through digitally signed XML documents.
+
+The four main components of the standard are as follows:
+\begin{enumerate}
+	\item Assertions - These consist of authentication assertions used to prove the ownership of an identity, and attribute assertions used to generate specific information about the person.
+    \item Protocols - These define how certain \ac{SAML} elements like assertions are packaged for transfer and also the processing rules associated with them.
+    \item Bindings - These define the raw transport methods used to transmit the authentication data. These can include HTTP GET, HTTP POST and SOAP.
+    \item Profiles - These define in detail how assertions, protocols and bindings combine to form a use case. \ac{SAML} 2.0 introduces many more profile contexts, including allowing the request to begin from the service provider itself.
+\end{enumerate}
+
+The verbosity of the \ac{SAML} standard and the fact that it can require extra infrastructure to support the transfer protocols \cite{dennis_updated_2015} has restricted its deployment to legacy enterprise environments. 
+
+\subsection{OAuth}
+OAuth \cite{hammer-lahav_oauth_2010} was introduced to allow a user to grant access to private resources connected to their identity. This is done without sharing private identity details or passwords between services. A long-lasting access token is specified by the protocol, which can be used by entities for continued access to user resources. 
+
+An example of this would be a user granting access of their Twitter or Facebook account to an external service, perhaps to allow it to make posts or gather analytics. The authorisation procedure and access token used by this external service would be managed using the OAuth specification.
+
+OAuth is distinct from OpenID, as although it shares the common architecture of redirection for obtaining authorisation, it only manages the access control of resources. OAuth does not have a concept of identity and does not provide identity authentication.
+
+OAuth and its updated standard OAuth 2.0 are both still in active use by many social networks and dependent applications, but it does not provide much value to the end-user in terms of identity sovereignty or control.
+
+\subsection{Discussion}
+Identity management systems, while attempting to reduce risks in the field, can still suffer from failure \cite{mimoso_office_2016, low_serious_2014}.This is owed to their inherent centralisation of data and resources. Therefore, there exists a gap in the state of the art for a management system not owned and managed by a single entity.
+
+\section{Public Key Infrastructure}
+\subsection{History}
+\ac{PKI} is a system for managing public-key encryption and digital certificates. It helps facilitate the secure transfer of information, and it authenticates parties operating over an insecure network. The principles behind this technology known as \textit{asymmetric cryptography} were developed in 1976 by Whitfield Diffie and Martin Hellman \cite{diffie_new_1976}. This was also explored in 1978 by another set of mathematicians when the RSA algorithm for asymmetric key generation was published \cite{rivest_method_1978}.
+
+In asymmetric cryptography, a public and private key are first generated. The relationship between these is such that data encrypted with one can only be decrypted by its matched pair. The public key can be widely distributed for identification of an entity, while the private key acts as a verifiable authorisation mechanism of that identifier.
+
+\subsection{Certificates}
+Critical to the functioning of \ac{PKI} is the use of digital certificates, which give key pairs meaning and establish the identity of entities within a given context. Certificates contain information about the issuing party, the subject of the certificate, the expiry of the content and a digital signature. This digital signature is added to prove that the issuing party verified and signed the certificate with their private key. 
+
+The authenticity and integrity of such certificates and how they are issued must be protected, to maintain a level of trust in the system. Centralised parties that issue certificates can be susceptible to errors or failure, such as DigiNotar \cite{the_associated_press_hacking_2011} and Symantec  \cite{ayer_misissued/suspicious_2017}, so revocation procedures in the given system should be robust.
+
+\subsection{Certificate Authorities}
+A \ac{CA} manages the lifecycle of digital certificates and acts as an entity that both the subject of the certificate and the party relying on it trusts. Root authorities are \acp{CA} that are inherently trusted by the end user and are pre-installed on devices and browsers. \acp{CA} are fundamentally centralised entities that perform individual validation for every entity that wishes to be certified.
+
+Certificates that are presented by a party can be traced back to a root authority to verify authenticity. This chain of trust underpins the \ac{PKI}, and all transactions and exchanges of information are protected by the certificates it contains.
+
+\subsection{Attribute Authorities}
+Attribute Authorities \cite{farrell_internet_2002} are similar to Certificate Authorities, but they exist when the separation between public keys and attributes is necessary. They can issue attribute certificates, which are used to control access to systems or resources. 
+
+This distinction from public key certificates is useful when the lifetime of an attribute certificate is different to that of the parent certificate. It is also sometimes required when the \ac{CA} cannot authorise a user for accessing a particular resource, so a secondary authority must do so instead. The authorisation information for an entity is thus logically separated from its identity for these reasons.
+
+\subsection{Signatures}
+Digital signatures act as a proof for authenticity and integrity of a piece of data. It certifies that digitally signed information was produced by a trusted source and has not changed since the signature. Data is passed through a hashing algorithm which produces a fixed-length output that cannot be easily reverse engineered. This hash is then encrypted with the private key of the entity and sent with the data. The receiver can validate the integrity of the message by passing the data through the same hashing function and matching it with the decrypted signature.
+
+\subsection{Web of Trust}
+\label{sec:web-of-trust}
+The Web of Trust \cite{the_free_software_foundation_gnu_1999} concept was introduced with PGP version 2.0, and it is a decentralised model of identity reputation achieved via a network of trusted parties. Users build up a reputation by having their keys verified and signed by their peers. A chain of trust can then be followed back to a locally trusted user when presented with a new key.
+
+A physical meeting in person is usually done to verify the mapping from an individual to their private key before creating a signature. Key signing parties \cite{brennan_keysigning_2008} exist for this purpose, where multiple individuals sign each other's keys after identity verification.
+
+The \ac{MSD} value is used to calculate how trusted a given key is, by finding the average shortest distance or number of hops from the user's trusted keys.
+
+\subsection{Discussion}
+The core concepts of \ac{PKI} are widely used on the internet to secure transactions and files. Data transfer over the HTTP protocol is encrypted and executable application files are signed using certificates. 
+
+\ac{PKI} is suitable in the context of delivering content from enterprise to end-users, but it does not work well the other way around. Key distribution, management and revocation issues have prevented \ac{PKI} from being widely deployed as a user-focused identity system.

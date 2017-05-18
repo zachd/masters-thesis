@@ -1,0 +1,38 @@
+\chapter{Security Evaluation}
+\section{Attack Considerations}
+The security aspects of a system are especially relevant in the identity space, as \ac{PII} that is hacked or leaked can have a detrimental effect on both users and companies \cite{acquisti_is_2006}. 
+
+This section documents some possible attack vectors for the implementation in this paper, and the solutions proposed to counteract them. These are considered \textit{active attacks}, where the attacker is attempting to alter the live operation of the system. They are distinct from \textit{passive attacks} where the attacker is attempting to merely obtain data for later use.
+
+\subsection{Disclosure Replay Attack}
+When user attributes are disclosed to a third party, they could be susceptible to a \textit{message replay} or \textit{playback attack} if the response is logged and replayed at a later time. This could lead to identity impersonation as the signed response can be verified as valid \cite{noauthor_replay_nodate}.
+
+A solution to this is for the requesting party to present a random string known as a \textit{challenge} to the user. The user must sign this challenge with their private key. Upon receipt, this signature can be verified against the challenge string that was sent. These challenge strings are transient and regenerated for each request. 
+
+\subsection{Man-in-the-Middle Attack}
+A \textit{man-in-the-middle attack} occurs when an attacker intercepts and alters messages between two parties who are directly communicating with each other. The likelihood of this attack is related to the communication channel chosen by the parties.
+
+The identity system in this paper can only attempt to mitigate this by ensuring that data is encrypted with the receiving party's public key for data privacy, and signed with the sending party's private key for message integrity. The key exchange step of the communication process is assumed to be safe, as the system cannot protect this.
+
+The initial key exchange between parties should be done in person, with visual confirmation that keys transferred are correct. If this information remains unaltered, then future communication through other channels can be considered safe.
+
+\subsection{Multi-User Compromise}
+Identity recovery is supported by giving authority to a group of the user's trusted friends. One downside to this approach is that the list of connected friends is stored on the public blockchain, so they could be susceptible to compromise as a group. An attacker only needs to take over 51\% of the user's contacts, which could be a small number if they do not possess very many.
+
+Time-delayed actions are proposed to solve this issue, notably by uPort, with appropriate notification and logging. The Ethereum protocol can output \textit{Event Logs} \cite{chow_technical_2016}, to which other parties can subscribe to receive updates. When the recovery contract receives requests from a user's recovery contacts, it can delay any account changes by a number of days and notify accordingly. 
+
+This can be done by binding actions to the timestamp announced within the block, and ensuring they are not activated unless a specified delay has passed. Incoming transactions to the contract check for pending actions and perform the functions if the correct time has elapsed. This is referred to as lazy execution \cite{merriam_how_2016}, and is required as there is currently no way for a contract to activate itself after a specific amount of time.
+
+\subsection{Sybil Attack}
+A \textit{Sybil attack} \cite{douceur_sybil_2002} occurs where a reputation system is undermined by the creation of many forged identities. This can affect the credibility of the system and is exploited by attackers to gain a disproportionate amount of power in the network.
+
+A proposed solution \cite{williams_byzantine_2015} subverts Sybil attacks by adding certain costs to parts of the system:
+\begin{itemize}
+  \item Entry Cost - Barrier cost for creating an identity
+  \item Existence Cost - Continuous fee for having an active identity
+  \item Exit Penalty - Penalty fee or dismissal for acting dishonestly
+\end{itemize}
+
+The identity system proposed in this paper does not attempt to inherently prevent Sybil attacks, but is architected in the hope that attestations by reputable authorities can bootstrap trust into the network.
+
+The addition of \textit{reputation scores} \cite{josang_survey_2007} given to identities is also a promising solution, which can be used to derive trust from a network of attestations. This is similar to the Web of Trust concept shown in Section \ref{sec:web-of-trust}.

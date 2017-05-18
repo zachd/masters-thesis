@@ -1,0 +1,32 @@
+\chapter{Conclusion}
+Identity in the digital sphere has been shown in this paper to be important both personally to users, and economically to businesses. The risks and negative effects that centralised identity systems possess imply that they are not a perfect solution for the identity domain.
+
+Decentralised identity systems that take a more user-centric approach pose less risk to the service provider and provide a greater benefit to the end user. This aspect was focused on in the context of blockchain technology, to try and explore a viable and realistic solution to apply to the field.
+
+\section{Research Objectives}
+A number of research objectives were outlined at the start of this paper, with the view of evaluating their feasibility and relevance in the proposed solution. They are assessed under the headings below.
+
+\subsubsection{Data Security}
+The aim of this requirement is to ensure that user information kept secure and private. The approach proposed in this paper ensures data security in transit using encryption in Section \ref{sec:data-transfer}. It also presents a novel approach to ensuring data at rest is kept private, using threshold cryptography with an encryption key as detailed in Section \ref{sec:user-attribute-privacy}.
+
+\subsubsection{Interface Usability}
+The primary focus of the interface design was to abstract away the fine details of public and private key creation, management and usage from the user. This was achieved in part by ensuring that key generation is done automatically with identity creation, and key storage was managed by the client application. Key recovery is also facilitated by the recovery quorum process detailed in Section \ref{sec:identity-recovery}, which removes the requirement of careful key management by the user.
+
+\subsubsection{Identity Verifiability}
+The attribute signing and signature verification processes detailed in Section \ref{sec:attribute-disclosure} guarantee that identities can be securely validated. A careful note can be made about the validity of user attributes, as these are only as trusted as the entities that provide the associated attestations. Even though attestations might be cryptographically valid, the network cannot verify \textit{why} the claim has been made. Lists of trusted authorities should be cautiously monitored to maintain a high level of trust in the network.
+
+\subsubsection{Account Recovery}
+The proposed system supports identity recovery using a network of peers, which is robust to single user compromise. An approach is also shown to recover private identity data if the keys are distributed correctly between these trusted peers.
+
+\subsubsection{Self-Sovereignty}
+The self-sovereign approach to identity management is fundamental to this research, and providing full autonomy over a user's identity and associated data helps to accomplish this. By giving the user sole identity access and the power to delegate authority to peers, users are no longer dependent on third parties for managing or storing their data. The blockchain element is crucial for this complete data decentralisation, as it is one of the few technologies that fundamentally supports it.
+
+\section{Future Work}
+Although this paper presents a comprehensive design and proof-of-concept implementation of a self-sovereign identity system; there are still improvements that can be made as the technology matures. 
+
+\subsection{Metropolis Release}
+The Ethereum blockchain is due to release a protocol upgrade soon, which will bring about improvements in transactions and smart contract operation.
+
+Work on allowing smart contracts to pay the transaction fees for users could be included, which would remove the requirement for users to have an initial Ethereum balance before joining the system. This is currently tackled by uPort by using a \textit{currency faucet} to pay these fees \cite{noauthor_does_nodate}, but by doing so, it introduces an element of external dependency in the system.
+
+RSA signature verification could also be added to this release, and it has been discussed in a recent proposal \cite{noauthor_eip0074_nodate}. This would remove the dependency on the client for identity verification and allow it to be done transparently on the blockchain.

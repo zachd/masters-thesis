@@ -1,0 +1,116 @@
+\documentclass[a4paper, 12pt, oneside]{report}
+\usepackage {tcdthesis}
+\usepackage {verbatim}
+\usepackage {acronym}
+\usepackage {tabu}
+\usepackage {url}
+\usepackage {minted}
+\usepackage {graphicx}
+\usepackage [colorlinks]{hyperref}
+\usepackage {fancyhdr}
+\setlength{\headheight}{15pt}
+\fancyhf{}
+\rhead{\thepage}
+\lhead{\textit{\nouppercase{\leftmark}}}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=black,
+  citecolor=black,
+}
+
+\mastersthesis
+
+\leftchapter
+\doublespace
+
+\renewcommand{\thesistitle}{Self-Sovereign Identity using Smart Contracts\\on the Ethereum Blockchain}
+\renewcommand{\thesisauthor}{Zachary Diebold}
+\renewcommand{\thesismonth}{May}
+\renewcommand{\thesisyear}{2017}
+\renewcommand{\thesistype}{Dissertation}
+\renewcommand{\thesisdegree}{Master in Computer Science}
+\renewcommand{\thesisauthorpreviousdegrees}{}
+\renewcommand{\thesissupervisor}{Dr. Donal O'Mahony}
+\renewcommand{\thesisacknowledgmenthead}{Acknowledgements}
+
+\begin{document}
+\thesistitlepage
+\thesisdeclarationpage
+
+\begin{thesisabstract}
+Centralised identity services that exist today fail to operate transparently and protect the rights of users. Single points of trust present constant operational risks for both companies and individuals. Self-sovereign identity is a solution to address this, which specifies a user-focused approach that gives full control of an identity back to the individual. This paper proposes the blockchain, a secure and decentralised trust-less system, as the platform to achieve this. A proof-of-concept identity system for the \textit{Ethereum blockchain} is designed and developed in this paper. \textit{Smart contracts} are used to facilitate the secure storage and open processing of user data. It also presents a novel approach to the secure recovery of encrypted private data. Emphasis is placed on the implementation security, information privacy and data recovery procedures of the system. 
+\end{thesisabstract}
+
+\begin{thesissummary}
+Digital identity systems that exist today are fragmented between service providers. Users need to duplicate their identity information between services, which reduces overall usability and increases the risk of data compromise. 
+
+In addition, logically centralised providers that offer single sign-on methods restrict the end-user from controlling how their data is stored and processed. Trusting centralised entities to manage sensitive information can lead to issues like identity theft, data leaks and privacy breaches. 
+
+Self-sovereign identity is a user-focused approach to identity management, that ensures full data control and transparency is retained by the individual. Self-sovereign identity also serves to protect the rights of  the users from the ever-increasing control of centralised entities.
+
+Blockchain technology offers a decentralised, transparent and immutable platform on which to safely transmit and track assets like digital currency. The Ethereum blockchain extends this concept by allowing programmable pieces of code known as \textit{smart contracts} to be executed. These smart contracts can manage digital currency, and store and verify arbitrary data.
+
+This paper investigates existing identity solutions, blockchain technology and decentralised systems. It then proposes a solution implemented with Ethereum smart contracts that encompasses the elements of cryptographic security, operational transparency, data autonomy and account recoverability. It is finally evaluated under a set of design objectives and comprehensive security considerations.
+
+\end{thesissummary}
+
+\begin{thesisacknowledgments}
+I'd like to express my sincere gratitude to the following people for their support:
+
+\begin{itemize}
+	\item My supervisor, Dr. Donal O'Mahony, for his unwavering enthusiasm, immense guidance and continuous support throughout my research.
+    \item The kind folks over at IPFS, uPort and the Solidity support channels for their extensive answers and technical advice.
+    \item My fellow classmates in Integrated Computer Science, for their shared advice, dedication and energy during our college career.
+    \item Finally, my loving family, for their constant encouragement, help and guidance throughout all my endeavours in life.
+\end{itemize}
+   
+\end{thesisacknowledgments}
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\chapter*{List of Acronyms}
+\addcontentsline {toc}{chapter}{List of Acronyms}
+\begin{acronym}
+  \acro{PKI}{Public Key Infrastructure}
+  \acro{GDPR}{General Data Protection Regulation}
+  \acro{KYC}{Know Your Customer}
+  \acro{AML}{Anti-Money Laundering}
+  \acro{IPFS}{InterPlanetary File System}
+  \acro{OP}{OpenID Provider}
+  \acro{RP}{Relying Party}
+  \acro{SAML}{Security Assertion Markup Language}
+  \acro{SSO}{Single Sign-On}
+  \acro{MSD}{Mean Shortest Distance}
+  \acro{CA}{Certificate Authority}
+  \acro{UUID}{Universally Unique Identifier}
+  \acro{JSON}{JavaScript Object Notation}
+  \acro{OCSP}{Online Certificate Status Protocol}
+  \acro{DLT}{Distributed Ledger Technology}
+  \acro{MRZ}{Machine Readable Zone}
+  \acro{DHT}{Distributed Hash Table}
+  \acro{IPNS}{InterPlanetary Naming System}
+  \acro{RPC}{Remote Procedure Call}
+  \acro{BIP}{Bitcoin Improvement Proposal}
+  \acro{PII}{Personally Identifiable Information}
+\end{acronym}
+
+\include{./chapters/1-introduction}
+\include{./chapters/2-digital-identity}
+\include{./chapters/3-blockchain}
+\include{./chapters/4-solution-design}
+\include{./chapters/5-implementation}
+\include{./chapters/6-evaluation}
+\include{./chapters/7-conclusion}
+
+\bibliographystyle{IEEEtran}
+\bibliography{Zotero}
+
+\begin{appendix}
+  \addcontentsline {toc}{chapter}{Appendices}
+  \include{./chapters/8-appendix}
+\end{appendix}
+
+\end{document}

@@ -1,0 +1,47 @@
+\chapter{Introduction}
+This section introduces the motivation for the dissertation work. The background to the field is explored, as well as the desired research objectives and possible challenges. Finally, the technical approach to implementing the planned work is outlined.
+
+\section{Motivation}
+\label{sec:motivation}
+The concept of identity is fundamental to human activities. The identity of an individual, their attributes, and representation of \textit{the self} is understood worldwide regardless of culture. Psychological and social well-being is also said to be dependent on maintaining a stable personal identity \cite{sharma_self_2010}. 
+
+Modern society binds the notion of individual identity with a legal identity, such as social security numbers, passports and driving licences. This binding leads to situations where one can lose their identity if the state rescinds it. It is especially apparent in the case of refugee crises, where migrants have difficulty living in countries in which they are not registered.
+
+Digital identity represents entities such as people and organisations in an online context. In its current state digital identity is siloed between providers, necessitating the creation of many identities across the internet.
+
+Due to this fragmentation, users eventually link multiple identities to their legal identity over time, which can pose risks of identity theft, privacy breaches and data leaks \cite{camp_economics_2012}.
+
+As the digital world becomes more prevalent in everyday life and the quantity of internet-connected devices increases, the risks of trusting disparate centralised services become very high. As a result of this, an opportunity arises to redefine modern concepts of digital identity in a decentralised context.
+
+\section{Research Objectives}
+Self-sovereign identity is the notion that an individual should have complete authority over their digital identity and its data. It removes control from centralised entities and pushes it out to the edges of the network, the users themselves.
+
+The core mission of blockchain technology is to provide a decentralised trust network. This can be mapped nicely onto the problems with centralised system trust in the identity landscape.
+
+Thus, this dissertation proposes a system using the Ethereum blockchain, a decentralised application platform, to create a self-sovereign identity solution. Such a solution, in pursuit of this goal, should conform to the following requirements:
+
+\begin{enumerate}
+  \item \textbf{Data Security}: Identities and their corresponding attributes should be stored in a secure manner, to prevent data compromise. Access and modification of user data should be restricted to the sole owner of the data.
+  \item \textbf{Interface Usability}: To interface with the system, it should not require prior knowledge of the underlying blockchain technology, key management procedures or encryption protocols. \ac{PKI} is an example of a system that has not reached widespread consumer adoption, partly due to poor system usability \cite{straub_usability_2006}.
+  \item \textbf{Identity Verifiability}: Individuals should be uniquely identifiable in the system, and have the ability to prove ownership of their information. External entities should be able to attest to the attributes of an individual.
+  \item \textbf{Account Recovery}: The system should allow for identity recovery in the case of device loss or data compromise. Revoked identities and attributes should also be discoverable by third parties.
+  \item \textbf{Self-Sovereignty}: The storage of data should not depend solely on a centralised entity, and as such the identity should be under full control of the user.
+\end{enumerate}
+
+\section{Use Cases}
+Such a self-sovereign system provides full autonomy over a user's personal identity, reputation and online presence. Example use cases for a decentralised self-sovereign identity platform are given below for context.
+
+\begin{itemize}
+  \item Users can maintain a single identity for connecting to online services, such as social networks or enterprise systems. The system provides authentication of the user to the online service to prove ownership of their identity. This allows controlled single sign-on without the need for transferring passwords or secret information, as only the proof is transmitted.
+  \item Governments can attest to the citizenship status or legal attributes of citizens, to then verify them in later interactions. Self-sovereignty and portability of the data allows it to be used internationally across borders.
+  \item Financial institutions can establish an improved \ac{KYC} process, to verify the legal identities of customers using their services. Liability is reduced by not storing raw customer data, while still complying with \ac{AML} regulation.
+\end{itemize}
+
+\section{Technical Approach}
+The Ethereum blockchain, while operating in a similar manner to Bitcoin by facilitating currency transfers, can also store programs known as \textit{smart contracts}. These programs are compiled to machine code and immutably deployed to the blockchain, and are verified and appended to the shared public ledger of transactions. The application state stored in these smart contracts is transparent and verifiable, and the execution of contract code is supported by the decentralised network. 
+
+Users in this system generate public and private keys corresponding to Ethereum wallets, and subsequently deploy Ethereum contracts containing their unique identifier. The generation and deployment of the smart contracts is done in the client, using a JavaScript framework for interfacing with Ethereum known as \textit{Web3.js}.
+
+Identity attributes are be stored on the decentralised storage platform known as \ac{IPFS}, which allows for the data to be stored in a redundant and immutable manner.
+
+As the core of the platform is the Ethereum smart contract, the client-side interface is seen as complementary and not central to the operation of the system. All the security and access-control features of the system are contained solely in the immutable contract code.
